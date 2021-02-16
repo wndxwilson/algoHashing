@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Hashing
 {
     private double loadFactor = 1;
@@ -12,10 +14,12 @@ public class Hashing
             this.loadFactor = loadFactor;
         }
         //load factor = n/h , h = n/load factor
-        this.size = (int)Math.ceil(max/this.loadFactor);
+        this.size = (int)Math.ceil(max/this.loadFactor)+1;
         this.hashTable = new HashingNode[this.size];
         this.prime = 11;
         this.hashMethod = type;
+
+        System.out.println("Hash table size: " +this.size);
     }
 
     public void addNode(int key,int value){
@@ -31,6 +35,10 @@ public class Hashing
         }
         //add value
         this.hashTable[hash] = new HashingNode(key,value);
+        
+       
+            
+        
     }
 
 
@@ -47,7 +55,7 @@ public class Hashing
     }
 
     private int hash2(int key){
-        return (key%prime) + 1;
+        return (key%this.prime)+1;
     }
 
     private int doubleHash(int key, int i){
@@ -79,7 +87,6 @@ public class Hashing
             if(this.hashTable[hash].getKey() == key){
                 end = System.nanoTime();
                 time = end - start;
-                //System.out.println("Comparism: "+compare+" Time: " + time);
                 ret[0] = (int)time;
                 ret[1] =  compare;
                 return ret;
@@ -96,9 +103,29 @@ public class Hashing
 
         end = System.nanoTime();
         time = end - start;
-        //System.out.println("Comparism: "+compare+" Time: " + time);
         ret[0] = (int)time;
         ret[1] =  compare;
         return ret;
+    }
+
+    public int searchValue(int key){
+        int i = 0;
+        int hash = hashCode(key,i,this.hashMethod);
+        while(this.hashTable[hash] != null){
+
+            if(this.hashTable[hash].getKey() == key){
+                return this.hashTable[hash].getValue();
+            }else{
+                i = i + 1;
+                hash = hashCode(key,i,this.hashMethod);
+                if(hash ==hashCode(key,0,this.hashMethod)){
+                    break;
+                }
+            }
+
+        }
+
+  
+        return -1;
     }
 }

@@ -8,13 +8,14 @@ import java.util.List;
 public class MainApp {
 	public static void main(String[] args) throws FileNotFoundException {
 		// params
-		double load_factor = 1;
+		double load_factor = 0.75;
 
 
 		// Generate dataset	
 		List<String[]> records = new ArrayList<>();
 		String row;
 
+		//Load csv file
 		BufferedReader csvReader = new BufferedReader(new FileReader("BankChurners.csv"));
 		try {
 			while ((row = csvReader.readLine()) != null) {
@@ -35,15 +36,31 @@ public class MainApp {
 		records.remove(0);
 	
 		//Create Hashing(load_factor,max_list_size,hashin_type)
+		//true - linear
 		Hashing h = new Hashing(load_factor,records.size(),true);
 
-			//add node
-			for(String[] data : records)
-			{
-				h.addNode(Integer.parseInt(data[0]),Integer.parseInt(data[2]));
-			}
+		//add data into hashtable
+		for(String[] data : records)
+		{
+			h.addNode(Integer.parseInt(data[0]),Integer.parseInt(data[2]));
+		}
 		
-		//search , -1 if not found
+		//Create Hashing(load_factor,max_list_size,hashin_type)
+		//false - double
+		Hashing h2 = new Hashing(load_factor,records.size(),false);
+
+		//add data into hashtable
+		for(String[] data : records)
+		{
+			h2.addNode(Integer.parseInt(data[0]),Integer.parseInt(data[2]));
+		}
+
+		int result = h.searchValue(714337233);
+		//int result = h2.searchValue();
+		System.out.println("Age: "+result);
+
+		/* //Uncomment to get average
+		//search for every possible entry
 		Integer[] value = new Integer[2];
 		value[0] = 0;
 		value[1] = 0;
@@ -72,15 +89,6 @@ public class MainApp {
 		System.out.println("Average Unsuccessful comparism linear hash: " + compare);
 		System.out.println("");
 
-		//Create Hashing(load_factor,max_list_size,hashin_type)
-		Hashing h2 = new Hashing(load_factor,records.size(),false);
-
-		//add node
-		for(String[] data : records)
-		{
-			h2.addNode(Integer.parseInt(data[0]),Integer.parseInt(data[2]));
-		}
-
 		value[0] = 0;
 		value[1] = 0;
 		for(String[] data : records){
@@ -104,6 +112,9 @@ public class MainApp {
 		System.out.println("Average Unsuccessful time double hash: " + time);
 		System.out.println("Average Unsuccessful comparism double hash: " + compare);
 		System.out.println("");
+		*/
 	}
+
+
 }
 	
