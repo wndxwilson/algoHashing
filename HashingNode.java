@@ -1,8 +1,8 @@
 public class HashingNode {
 
     private int key;
-    private int value;
-    HashingNode(int key,int value){
+    private String value;
+    HashingNode(int key,String value){
         this.key = key;
         this.value = value;
     }
@@ -11,11 +11,11 @@ public class HashingNode {
         return this.key;
     }
 
-    public int getValue(){
+    public String getValue(){
         return this.value;
     }
 
-    public void updateValue(int value){
+    public void updateValue(String value){
         this.value = value;
     }
 }
