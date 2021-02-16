@@ -47,7 +47,7 @@ public class Hashing
     }
 
     private int hash2(int key){
-        return this.prime - (key%prime);
+        return (key%prime) + 1;
     }
 
     private int doubleHash(int key, int i){
@@ -64,14 +64,14 @@ public class Hashing
         }
     }
 
-    public int search(int key){
+    public Integer[] search(int key){
         int i = 0;
         //Print out the stats
         int compare = 0;
         long time;
         long start = System.nanoTime();
         long end;
-
+        Integer[] ret = new Integer[2];
         int hash = hashCode(key,i,this.hashMethod);
         compare = compare + 1;
         while(this.hashTable[hash] != null){
@@ -79,8 +79,10 @@ public class Hashing
             if(this.hashTable[hash].getKey() == key){
                 end = System.nanoTime();
                 time = end - start;
-                System.out.println("Comparism: "+compare+" Time: " + time);
-                return  this.hashTable[hash].getValue();
+                //System.out.println("Comparism: "+compare+" Time: " + time);
+                ret[0] = (int)time;
+                ret[1] =  compare;
+                return ret;
             }else{
                 i = i + 1;
                 hash = hashCode(key,i,this.hashMethod);
@@ -94,7 +96,9 @@ public class Hashing
 
         end = System.nanoTime();
         time = end - start;
-        System.out.println("Comparism: "+compare+" Time: " + time);
-        return -1;
+        //System.out.println("Comparism: "+compare+" Time: " + time);
+        ret[0] = (int)time;
+        ret[1] =  compare;
+        return ret;
     }
 }

@@ -3,28 +3,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class MainApp {
 	public static void main(String[] args) throws FileNotFoundException {
 		// params
-		int begin = 50;
-		int end = 1000;
+		double load_factor = 1;
 
-		double load_factor = 0.5;
-		int a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
-		// Generate dataset
-		Random rand = new Random();
-		List<Integer[]> dataset = new ArrayList<Integer[]>();
-		for (int i = begin; i <= end; i++) {
-			Integer[] list = { i+90123400, rand.nextInt(500) };
-			dataset.add(list);
-		}
-		
+
+		// Generate dataset	
 		List<String[]> records = new ArrayList<>();
 		String row;
+
 		BufferedReader csvReader = new BufferedReader(new FileReader("BankChurners.csv"));
 		try {
 			while ((row = csvReader.readLine()) != null) {
@@ -45,21 +35,45 @@ public class MainApp {
 		records.remove(0);
 	
 		//Create Hashing(load_factor,max_list_size,hashin_type)
-		Hashing h = new Hashing(load_factor,records.size(),false);
+		Hashing h = new Hashing(load_factor,records.size(),true);
 
 			//add node
 			for(String[] data : records)
 			{
 				h.addNode(Integer.parseInt(data[0]),Integer.parseInt(data[2]));
 			}
-
+		
 		//search , -1 if not found
-		int x = h.search(20);
-		if(x == -1){
-			System.out.println("Not found");
+		Integer[] value = new Integer[2];
+		value[0] = 0;
+		value[1] = 0;
+		Integer time = 0;
+		Integer compare = 0;
+
+		for(String[] data : records){
+			value[0] =  h.search(Integer.parseInt(data[0]))[0] + value[0];
+			value[1] =  h.search(Integer.parseInt(data[0]))[1] + value[1];
 		}
+		time = value[0]/records.size();
+		compare = value[1]/records.size();
+		System.out.println("Average Successful time linear hash: " + time);
+		System.out.println("Average Successful comparism linear hash: " + compare);
+		System.out.println("");
+
+		value[0] = 0;
+		value[1] = 0;
+		for(int i = 0;i<1000;i++){
+			value[0] =  h.search(i)[0] + value[0];
+			value[1] =  h.search(i)[1] + value[1];
+		}
+		time = value[0]/1000;
+		compare = value[1]/1000;
+		System.out.println("Average Unsuccessful time linear hash: " + time);
+		System.out.println("Average Unsuccessful comparism linear hash: " + compare);
+		System.out.println("");
+
 		//Create Hashing(load_factor,max_list_size,hashin_type)
-		Hashing h2 = new Hashing(load_factor,records.size(),true);
+		Hashing h2 = new Hashing(load_factor,records.size(),false);
 
 		//add node
 		for(String[] data : records)
@@ -67,15 +81,29 @@ public class MainApp {
 			h2.addNode(Integer.parseInt(data[0]),Integer.parseInt(data[2]));
 		}
 
-		//Print out the hash map for debug purpose
-		//h.printNode();
-
-		//search , -1 if not found
-		x = h2.search(0);
-		if(x == -1){
-			System.out.println("Not found");
+		value[0] = 0;
+		value[1] = 0;
+		for(String[] data : records){
+			value[0] =  h2.search(Integer.parseInt(data[0]))[0] + value[0];
+			value[1] =  h2.search(Integer.parseInt(data[0]))[1] + value[1];
 		}
-	
+		time = value[0]/records.size();
+		compare = value[1]/records.size();
+		System.out.println("Average Successful time double hash: " + time);
+		System.out.println("Average Successful comparism double hash: " + compare);
+		System.out.println("");
+
+		value[0] = 0;
+		value[1] = 0;
+		for(int i = 0;i<1000;i++){
+			value[0] =  h2.search(i)[0] + value[0];
+			value[1] =  h2.search(i)[1] + value[1];
+		}
+		time = value[0]/1000;
+		compare = value[1]/1000;
+		System.out.println("Average Unsuccessful time double hash: " + time);
+		System.out.println("Average Unsuccessful comparism double hash: " + compare);
+		System.out.println("");
 	}
 }
 	
