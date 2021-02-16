@@ -14,11 +14,11 @@ public class Hashing
         //load factor = n/h , h = n/load factor
         this.size = (int)Math.ceil(max/this.loadFactor);
         this.hashTable = new HashingNode[this.size];
-        this.prime = this.size/2 + 1;
+        this.prime = 11;
         this.hashMethod = type;
     }
 
-    public void addNode(int key,String value){
+    public void addNode(int key,int value){
 
          //get hashcode
          int i = 0;
@@ -38,7 +38,6 @@ public class Hashing
         if(type){
             return linear(key,i);
         }else{
-
             return doubleHash(key,i);
         }
     }
@@ -65,7 +64,7 @@ public class Hashing
         }
     }
 
-    public String search(int key){
+    public int search(int key){
         int i = 0;
         //Print out the stats
         int compare = 0;
@@ -74,9 +73,8 @@ public class Hashing
         long end;
 
         int hash = hashCode(key,i,this.hashMethod);
-       
+        compare = compare + 1;
         while(this.hashTable[hash] != null){
-            compare = compare + 1;
 
             if(this.hashTable[hash].getKey() == key){
                 end = System.nanoTime();
@@ -90,6 +88,8 @@ public class Hashing
                     break;
                 }
             }
+            compare = compare + 1;
+
         }
 
         end = System.nanoTime();
