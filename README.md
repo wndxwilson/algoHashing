@@ -17,8 +17,8 @@ Load factors to be tested are 0.25, 0.5, 0.75 and 1, the load factor for open ad
 `git clone https://github.com/wndxwilson/algoHashing.git`
 
 ## 3 Search hashing 
-In MainApp.java, add the key to search for the value.
-'int result = h.searchValue(key);'
+In MainApp.java, add the key to search for the value.<br>
+`int result = h.searchValue(key);`
 
 ## 4 Conclusion
 
