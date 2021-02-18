@@ -1,16 +1,13 @@
 # algoHashing
 cz2001 lab2
 
-## 1 Problem Statement  
-Using open address hashing and linear probing, compare between different hashing functions (Group 3).
+## 1.1 Problem Scenario and Dataset
+A bank is disturbed with more and more customers leaving their credit card services. They hope to predict who is going to leave so they can proactively provide them better services and change their minds. This dataset consists of 10,000 customers with 18 attributes, such as their age, salary, marital_status, credit card limit, credit card category, etc. We used this dataset for searching the clientNumber and Age using our hashing algorithm.
 
-### 1.1 Problem Scenario and Dataset:
-We used the bank churners dataset by searching the clientNumber and Age for our hashing algorithm.
+## 1.2 Our Chosen Algorithm
+We use Linear Probing and Double Hashing to rehash hable table collisions. A hash function may map different keys to the same slot, such as in many-to-one mapping and not one-to-one mapping. For example, in a dataset matching unique phone numbers to people, a phone number 66754372 can be hashed to the same location as 66752378 when the hash function is f(k) = kmod997, leading to collision.  
 
-### 1.2 Our chosen algorithm:
-We use Linear Probing and Double Hashing to avoid hable table collision. As a hash function may map different keys to the same slot such as a many-to-one mapping and not one-to-one mapping. Example will be phone number 66754372 hashes to the same location as 66752378. Since the two keys have the same hash value it leads to collision.
-
-### 1.3 Load factor for open hashing:
+## 1.3 Load Factor for Open Address Hashing
 Load factors to be tested are 0.25, 0.5, 0.75 and 1, the load factor for open address hashing can never be greater than 1, as each slot of the table size can only contain one key.
 
 ## 2 How to use
