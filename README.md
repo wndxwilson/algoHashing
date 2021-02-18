@@ -1,5 +1,6 @@
 # algoHashing
-cz2001 lab2
+cz2001 lab2 
+Using open address hashing and linear probing, compare between different hashing functions (Group 3).
 
 ## 1.1 Problem Scenario and Dataset
 A bank is disturbed with more and more customers leaving their credit card services. They hope to predict who is going to leave so they can proactively provide them better services and change their minds. This dataset consists of 10,000 customers with 18 attributes, such as their age, salary, marital_status, credit card limit, credit card category, etc. We used this dataset for searching the clientNumber and Age using our hashing algorithm.
@@ -19,9 +20,9 @@ In MainApp.java, add the key to search for the value.<br>
 
 ## 4 Conclusion
 
-Linear probing can create large primary clusters which can in turn create large primary clusters. This increases the run time for the find/ insert operations
+Linear probing can create large primary clusters which can in turn increase the run time for the find/insert operations.
 
-In order for us to reduce primary clusters, we can implement 
+In order for us to reduce primary clusters, we can implement: 
 
 (hash(key) + 1 * d ) % m
 
@@ -29,6 +30,8 @@ m = prime number
 d = constant int >1 and co-prime to m
 
 
-Since d and m are co-prime, the probe sequence covers all the slots in the        hash table.
+Since d and m are co-prime, the probe sequence covers all the slots in the hash table.
 
 In our code, we have also concluded that double hashing yields better performance compared to linear probing and that a higher load factor resulted in a higher chance of conflict. Lastly, when the hash table size is kept to a prime number, the chance of having a conflict is significantly reduced thus we have implemented a function to round the hash table size to the nearest prime in our implementation.
+
+
