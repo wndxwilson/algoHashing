@@ -1,12 +1,11 @@
-import java.io.IOException;
-
 public class Hashing
 {
     private double loadFactor = 1;
     private int size;
     private HashingNode[] hashTable;
     private boolean hashMethod;
-    private int prime;
+    private long time;
+    private int compare;
 
     //constructor
     Hashing(double loadFactor, int max,boolean type){
@@ -14,12 +13,9 @@ public class Hashing
             this.loadFactor = loadFactor;
         }
         //load factor = n/h , h = n/load factor
-        this.size = (int)Math.ceil(max/this.loadFactor)+1;
+        this.size = (int)Math.ceil(max/this.loadFactor);
         this.hashTable = new HashingNode[this.size];
-        this.prime = 11;
         this.hashMethod = type;
-
-        System.out.println("Hash table size: " +this.size);
     }
 
     public void addNode(int key,int value){
@@ -28,38 +24,35 @@ public class Hashing
          int i = 0;
          int hash = hashCode(key,i,this.hashMethod);
 
-        //Find an empty slot
+        //Linear probing
         while(this.hashTable[hash] != null){
             i = i + 1;
             hash = hashCode(key,i,this.hashMethod);
         }
         //add value
         this.hashTable[hash] = new HashingNode(key,value);
-        
-       
-            
-        
     }
 
 
     private int hashCode(int key, int i, boolean type){
         if(type){
-            return linear(key,i);
+            return division(key,i);
         }else{
-            return doubleHash(key,i);
+            return multiplication(key,i);
         }
     }
 
-    private int linear(int key, int i){
+    private int division(int key, int i){
+        //h(key) = key mod table_size 
         return (key+i) % this.size;
     }
 
-    private int hash2(int key){
-        return (key%this.prime)+1;
-    }
-
-    private int doubleHash(int key, int i){
-        return (linear(key,0) + i*hash2(key) )% this.size;
+    private int multiplication(int key, int i){
+        //h(k) = floor (m * (k * c mod 1))
+        //c = (sqrt(5)-1)/2 = 0.6180339887
+        double c = 0.6180339887;
+        return  (int)Math.floor(this.size*((key+i)*c%1));
+         
     }
 
     public void printNode(){
@@ -72,48 +65,17 @@ public class Hashing
         }
     }
 
-    public Integer[] search(int key){
-        int i = 0;
-        //Print out the stats
-        int compare = 0;
-        long time;
+    public int search(int key){
+        //Start the timer and reset comparism
         long start = System.nanoTime();
-        long end;
-        Integer[] ret = new Integer[2];
-        int hash = hashCode(key,i,this.hashMethod);
-        compare = compare + 1;
-        while(this.hashTable[hash] != null){
-
-            if(this.hashTable[hash].getKey() == key){
-                end = System.nanoTime();
-                time = end - start;
-                ret[0] = (int)time;
-                ret[1] =  compare;
-                return ret;
-            }else{
-                i = i + 1;
-                hash = hashCode(key,i,this.hashMethod);
-                if(hash ==hashCode(key,0,this.hashMethod)){
-                    break;
-                }
-            }
-            compare = compare + 1;
-
-        }
-
-        end = System.nanoTime();
-        time = end - start;
-        ret[0] = (int)time;
-        ret[1] =  compare;
-        return ret;
-    }
-
-    public int searchValue(int key){
+        this.compare = 1;
         int i = 0;
+        
         int hash = hashCode(key,i,this.hashMethod);
         while(this.hashTable[hash] != null){
 
             if(this.hashTable[hash].getKey() == key){
+                this.time = System.nanoTime() - start;
                 return this.hashTable[hash].getValue();
             }else{
                 i = i + 1;
@@ -122,10 +84,23 @@ public class Hashing
                     break;
                 }
             }
+            this.compare = this.compare + 1;
 
         }
 
-  
+        this.time = System.nanoTime() - start;
         return -1;
+    }
+
+    public long getTime(){
+        return this.time;
+    }
+
+    public int getCompare(){
+        return this.compare;
+    }
+
+    public int getTableSize(){
+        return this.size;
     }
 }
