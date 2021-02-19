@@ -1,0 +1,27 @@
+Hash method true = division hashing mehtod.
+Hash method false = multiplocation hashing method.
+
+##Computer specifications
+Processor: Intel(R)Core(TM)i7-8700 CPU @3.20GHz
+RAM: 16.0 GB
+
+##Results
+Table size: 40508 Load factor: 0.25 Avg time: 239 Avg Compare: 1 Hash method: true Status: successful
+Table size: 20254 Load factor: 0.5 Avg time: 41 Avg Compare: 1 Hash method: true Status: successful
+Table size: 13503 Load factor: 0.75 Avg time: 51 Avg Compare: 3 Hash method: true Status: successful
+Table size: 10127 Load factor: 1.0 Avg time: 180 Avg Compare: 47 Hash method: true Status: successful
+
+Table size: 40508 Load factor: 0.25 Avg time: 75 Avg Compare: 1 Hash method: false Status: successful
+Table size: 20254 Load factor: 0.5 Avg time: 231 Avg Compare: 1 Hash method: false Status: successful
+Table size: 13503 Load factor: 0.75 Avg time: 325 Avg Compare: 2 Hash method: false Status: successful
+Table size: 10127 Load factor: 1.0 Avg time: 2771 Avg Compare: 22 Hash method: false Status: successful
+
+Table size: 40508 Load factor: 0.25 Avg time: 38 Avg Compare: 1 Hash method: true Status: unsuccessful
+Table size: 20254 Load factor: 0.5 Avg time: 50 Avg Compare: 2 Hash method: true Status: unsuccessful
+Table size: 13503 Load factor: 0.75 Avg time: 55 Avg Compare: 9 Hash method: true Status: unsuccessful
+Table size: 10127 Load factor: 1.0 Avg time: 33173 Avg Compare: 10127 Hash method: true Status: unsuccessful
+
+Table size: 40508 Load factor: 0.25 Avg time: 101 Avg Compare: 1 Hash method: false Status: unsuccessful
+Table size: 20254 Load factor: 0.5 Avg time: 152 Avg Compare: 2 Hash method: false Status: unsuccessful
+Table size: 13503 Load factor: 0.75 Avg time: 528 Avg Compare: 6 Hash method: false Status: unsuccessful
+Table size: 10127 Load factor: 1.0 Avg time: 669109 Avg Compare: 10127 Hash method: false Status: unsuccessful
