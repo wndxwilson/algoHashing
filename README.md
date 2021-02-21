@@ -19,12 +19,12 @@ Load factors to be tested are 0.25, 0.5, 0.75 and 1, the load factor for open ad
 For hash division method, the functions takes the form of h(key) = key mode table size, while for the multiplication method, the function takes the form of h(key_ = floor(table size * (key * A mod 1)). Our team wil compare and analyze both hash function and record its findings. The finding can be found in the record.txt.
 
 ## 2 How to use
-`git clone https://github.com/wndxwilson/algoHashing.git`
+`git clone https://github.com/wndxwilson/algoHashing.git` <br>
 Follow main.java for example
 
 ## 3 Search hashing 
 In MainApp.java, add the key to search for the value.<br>
-`int result = h.searchValue(key);`
+`int result = h.search(key);`
 
 ## 4 Conclusion
 
