@@ -20,7 +20,7 @@ For hash division method, the functions takes the form of h(key) = key mode tabl
 
 ## 2 How to use
 `git clone https://github.com/wndxwilson/algoHashing.git` <br>
-Follow main.java for example
+Follow MainApp.java for example
 
 ## 3 Search hashing 
 In MainApp.java, add the key to search for the value.<br>
